@@ -1,6 +1,6 @@
-module.exports = async (req, res) => {
-  const { default: fetch } = await import('node-fetch');
+const fetch = require('node-fetch');
 
+module.exports = async (req, res) => {
   if (req.method !== 'POST') {
     return res.status(405).json({ error: 'Method not allowed' });
   }
@@ -63,7 +63,6 @@ module.exports = async (req, res) => {
 
 // Helper: Get token supply via Helius RPC
 async function getTokenSupply(mint) {
-  const { default: fetch } = await import('node-fetch');
   try {
     const response = await fetch(
       `https://mainnet.helius-rpc.com/?api-key=${process.env.HELIUS_API_KEY}`,
@@ -88,7 +87,6 @@ async function getTokenSupply(mint) {
 
 // Helper: Send Telegram message
 async function sendTelegramAlert(details) {
-  const { default: fetch } = await import('node-fetch');
   const message = `
 🚨 *Insider Alert: Large Memecoin Transfer*
 *Wallet:* \`${details.wallet}\`
