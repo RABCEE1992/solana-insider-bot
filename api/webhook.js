@@ -1,13 +1,6 @@
 module.exports = async (req, res) => {
-  const { default: fetch } = await import('node-fetch');  // <-- Add this line here
+  const { default: fetch } = await import('node-fetch');
 
-  if (req.method !== 'POST') {
-    return res.status(405).json({ error: 'Method not allowed' });
-  }
-  // ... rest of your code stays the same
-};
-
-module.exports = async (req, res) => {
   if (req.method !== 'POST') {
     return res.status(405).json({ error: 'Method not allowed' });
   }
@@ -70,6 +63,7 @@ module.exports = async (req, res) => {
 
 // Helper: Get token supply via Helius RPC
 async function getTokenSupply(mint) {
+  const { default: fetch } = await import('node-fetch');  // <-- Add this too, for the helper
   try {
     const response = await fetch(
       `https://mainnet.helius-rpc.com/?api-key=${process.env.HELIUS_API_KEY}`,
@@ -94,6 +88,7 @@ async function getTokenSupply(mint) {
 
 // Helper: Send Telegram message
 async function sendTelegramAlert(details) {
+  const { default: fetch } = await import('node-fetch');  // <-- Add this too
   const message = `
 🚨 *Insider Alert: Large Memecoin Transfer*
 *Wallet:* \`${details.wallet}\`
