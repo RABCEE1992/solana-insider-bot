@@ -1,4 +1,11 @@
-const fetch = require('node-fetch');
+module.exports = async (req, res) => {
+  const { default: fetch } = await import('node-fetch');  // <-- Add this line here
+
+  if (req.method !== 'POST') {
+    return res.status(405).json({ error: 'Method not allowed' });
+  }
+  // ... rest of your code stays the same
+};
 
 module.exports = async (req, res) => {
   if (req.method !== 'POST') {
